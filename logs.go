@@ -30,17 +30,18 @@ type LogConfig struct {
 // BeeLogger references the used application logger.
 var AppLogger *BeeLogger
 
-func InitLog(filename string, level int) {
+func InitLog(filename string, level int,adapterFile string,maxdays int) {
 	var config LogConfig = LogConfig{
 		Filename: filename,
 		Level:    level,
 		Maxlines: 20000,
 		Maxsize:  0,
 		Daily:    true,
-		Maxdays:  4,
+		Maxdays:  maxdays,
 	}
 
 	con, _ := json.Marshal(config)
 	AppLogger = GetBeeLogger()
-	AppLogger.SetLogger(AdapterFile, string(con))
+	AppLogger.SetLogger(adapterFile, string(con))
 }
+
